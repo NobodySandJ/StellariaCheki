@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellaria Official Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff9fb;
+        }
+
+        .member-card:hover .member-overlay {
+            opacity: 1;
+        }
+
+        .modal {
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 10px;
+            background-color: #ff5a8d;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div
+                    class="text-2xl font-bold bg-gradient-to-r from-purple-500 to-purple-500 bg-clip-text text-transparent">
+                    Stellaria
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-purple-600 font-medium hover:text-purple-800">Home</a>
+                <a href="#members" class="text-gray-600 hover:text-purple-600">Members</a>
+                <a href="#schedule" class="text-gray-600 hover:text-purple-600">Schedule</a>
+                <a href="#cheki" class="text-gray-600 hover:text-purple-600">Cheki Session</a>
+                <a href="#cart" class="text-gray-600 hover:text-purple-600 relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </a>
+            </nav>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-purple-100 to-purple-100 py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-purple-700 mb-4">Cheki Chika Idol</h1>
+            <p class="text-xl md:text-2xl text-purple-600 mb-8">Stellaria</p>
+            <div class="text-gray-700 max-w-2xl mx-auto text-lg space-y-4 leading-relaxed">
+                <div>
+                    <strong class="block text-purple-700 text-xl mb-2">Cara Order Cheki:</strong>
+                    <ul class="list-decimal list-inside space-y-1">
+                        <li>Klik Add to Cart sesuai jumlah Cheki, lalu lakukan pembayaran</li>
+                        <li>Datang ke event</li>
+                        <li>Datang ke booth Stellaria dan ambil tiket cheki</li>
+                        <li>Antri di area cheki dan tunggu giliranmu</li>
+                        <li>Siap cheki dengan oshi~!</li>
+                    </ul>
+                    <p class="text-sm mt-2 italic text-gray-500">*Apabila pemesan berhalangan hadir pada hari-H, cheki
+                        bisa dikirimkan melalui ekspedisi (ongkir ditanggung pemesan)*</p>
+                </div>
+
+                <div>
+                    <strong class="block text-purple-700 text-xl mb-2">LINE UP :</strong>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>☆ Alice (Purple) @alicelyn__</li>
+                        <li>☆ Ella (Green) @salmonelix</li>
+                        <li>☆ Melody (Red) @lodehehe</li>
+                        <li>☆ Nae (Orange) @evilnae_</li>
+                        <li>☆ Yuna (Yellow) @hokaitto</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <strong class="block text-purple-700 text-xl mb-2">Harga:</strong>
+                    <ul class="list-disc list-inside">
+                        <li>1 Member Cheki (Single / 2Shot) = <strong>IDR 25.000</strong> per lembar</li>
+                        <li>1 All Member / Group Cheki = <strong>IDR 30.000</strong> per lembar</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p><strong>Pembayaran melalui:</strong> Scan QRIS saat checkout.</p>
+                </div>
+
+                <div>
+                    <p>
+                        Jika ada pertanyaan atau kendala, bisa DM ke Instagram Stellaria
+                        <a href="https://instagram.com/stellaria.official" target="_blank"
+                            class="text-purple-600 underline">@stellaria.official</a>
+                        atau WhatsApp ke nomor CP Stellaria:
+                        <a href="https://wa.me/6282211232447" target="_blank"
+                            class="text-purple-600 underline">0822-1123-2447 (Rendy)</a>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-center text-purple-700 font-semibold">Terima kasih telah mendukung Stellaria~<br>See
+                        You! ☆</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-700 mb-12">Members of Stellaria</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Member 1 -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/Nae2.jpg" alt="Nae" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Nae 🧡</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Nae 🧡</h3>
+                        <p class="text-gray-600 mb-4">Affectionate,Expressive,Playful</p>
+                        <button onclick="openModal('nae')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Profile
+                        </button>
+                        <button onclick="addToCart('Nae', '🧡', 'foto/Nae.jpg')"
+                            class="w-full mt-2 bg-orange-100 text-orange-700 py-2 rounded-lg hover:bg-orange-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/Yuna2.jpg" alt="Yuna" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Yuna 💛</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Yuna 💛</h3>
+                        <p class="text-gray-600 mb-4">Independent,Quirky,Stylish</p>
+                        <button onclick="openModal('yuna')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Profile
+                        </button>
+                        <button onclick="addToCart('Yuna', '💛', 'foto/Yuna.jpg')"
+                            class="w-full mt-2 bg-yellow-100 text-yellow-700 py-2 rounded-lg hover:bg-yellow-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/Alice2.jpg" alt="Alice" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Alice 💜</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Alice 💜</h3>
+                        <p class="text-gray-600 mb-4">Cheerful,Imaginative,Energetic</p>
+                        <button onclick="openModal('alice')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Profile
+                        </button>
+                        <button onclick="addToCart('Alice', '💜', 'foto/Alice.jpg')"
+                            class="w-full mt-2 bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/Melody2.jpg" alt="Melody" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Melody ❤️</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Melody ❤️</h3>
+                        <p class="text-gray-600 mb-4">Warmhearted,Creative,Charming</p>
+                        <button onclick="openModal('melody')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Profile
+                        </button>
+                        <button onclick="addToCart('Melody', '❤️', 'foto/Melody.jpg')"
+                            class="w-full mt-2 bg-red-100 text-red-700 py-2 rounded-lg hover:bg-red-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/Ella2.jpg" alt="Ella" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Ella 💚</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Ella 💚</h3>
+                        <p class="text-gray-600 mb-4">Artistic,Gentle,Dreamy</p>
+                        <button onclick="openModal('ella')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Profile
+                        </button>
+                        <button onclick="addToCart('Ella', '💚', 'foto/Ella.jpg')"
+                            class="w-full mt-2 bg-green-100 text-green-700 py-2 rounded-lg hover:bg-green-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Group Cheki -->
+                <div
+                    class="member-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                    <div class="relative">
+                        <img src="foto/group2.jpg" alt="Group Cheki" class="w-full aspect-square object-cover">
+                        <div
+                            class="member-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+                            <h3 class="text-white text-xl font-bold">Group Cheki 🖤</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-black-700">Group Cheki 🖤</h3>
+                        <p class="text-gray-600 mb-4">Photo with all members.</p>
+                        <button onclick="openModal('group')"
+                            class="w-full bg-purple-100 text-purple-700 py-2 rounded-lg hover:bg-purple-200 transition">
+                            View Details
+                        </button>
+                        <button onclick="addToCart('Group Cheki', '🖤', 'foto/group2.jpg')"
+                            class="w-full mt-2 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-16 bg-purple-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-700 mb-12">Schedule</h2>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-purple-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-purple-700 mb-2">June 15, 2023</h3>
+                            <p class="text-gray-700">Cheki Session @ Stellaria Cafe</p>
+                            <p class="text-sm text-gray-500">2:00 PM - 5:00 PM</p>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-purple-700 mb-2">June 22, 2023</h3>
+                            <p class="text-gray-700">Mini Live Performance</p>
+                            <p class="text-sm text-gray-500">7:00 PM - 9:00 PM</p>
+                        </div>
+                        <div class="bg-purple-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-purple-700 mb-2">June 29, 2023</h3>
+                            <p class="text-gray-700">Cheki Session @ Idol Fest</p>
+                            <p class="text-sm text-gray-500">12:00 PM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cheki Session Section -->
+    <section id="cheki" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-700 mb-12">Cheki Session</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-purple-50 rounded-xl p-8 shadow-md">
+                    <h3 class="text-2xl font-bold text-purple-700 mb-4">Meet & Greet with Stellaria</h3>
+                    <p class="text-gray-700 mb-6">
+                       Sesi Cheki kami adalah acara khusus tempat Anda dapat bertemu dengan anggota favorit Anda, berfoto polaroid (cheki) bersama mereka, dan berbincang singkat. Setiap sesi mencakup satu cheki yang ditandatangani dan hadiah kecil dari anggota.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-purple-600 mb-2">Member cheki</h4>
+                            <p class="text-gray-700">Rp25,000 per member</p>
+                            <p class="text-sm text-gray-500">Includes one cheki and small talk</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-purple-600 mb-2">Group cheki</h4>
+                            <p class="text-gray-700">Rp30,000 per member</p>
+                            <p class="text-sm text-gray-500">Includes one cheki and small talk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-700 mb-12">Your Cart</h2>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div id="cart-items" class="mb-6">
+                        <!-- Cart items will be dynamically inserted here -->
+                        <p class="text-gray-500 text-center py-8">Your cart is empty</p>
+                    </div>
+                    <div class="flex justify-between items-center border-t pt-4">
+                        <button onclick="clearCart()"
+                            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                            Clear Cart
+                        </button>
+                        <div class="text-right">
+                            <p class="text-gray-700">Total: <span id="cart-total" class="font-bold">¥0</span></p>
+                            <button onclick="checkout()"
+                                class="mt-2 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                                Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold mb-2">Stellaria</div>
+                    <p class="text-purple-200">Cheki Chika Idol Group</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.whatsapp.com/channel/0029VaxeSCKFcow3VXkvkK0x"
+                        class="text-purple-200 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/stellaria.official/" class="text-purple-200 hover:text-white"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@stellaria.official" class="text-purple-200 hover:text-white"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-purple-300 text-sm">
+                &copy; 2025 Stellaria. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal fixed inset-0 bg-black/70 z-50 flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-black-700"></h3>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <img id="modal-image" src="" alt="" class="w-full aspect-square object-cover rounded-lg mb-4">
+                <div id="modal-content" class="space-y-3">
+                    <!-- Content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal"
+        class="modal fixed inset-0 bg-black/70 z-50 flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-2xl font-bold text-purple-700">Checkout</h3>
+                    <button onclick="closeCheckoutModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="checkout-form" class="space-y-4">
+                    <div>
+                        <label for="fullname" class="block text-gray-700 mb-1">Nama</label>
+                        <input type="text" id="fullname" required
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" required
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-1">WhatsApp</label>
+                        <input type="tel" id="phone" required
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    </div>
+                    <div>
+                        <label for="instagram" class="block text-gray-700 mb-1">Instagram</label>
+                        <input type="text" id="instagram"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-1">Scan QRIS untuk pembayaran</label>
+                            <img src="foto/qris.jpg" alt="QRIS Payment" class="w-full max-w-xs mx-auto rounded-lg shadow">
+                        </div>
+                        <div>
+                            <label for="payment-proof" class="block text-gray-700 mb-1">Upload Bukti Pembayaran</label>
+                            <input type="file" id="payment-proof" name="payment-proof" accept="image/*" required
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+                        Complete Order
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div id="thankyou-modal"
+        class="modal fixed inset-0 bg-black/70 z-50 flex items-center justify-center opacity-0 invisible">
+        <div class="bg-white rounded-xl max-w-md w-full mx-4 p-8 text-center">
+            <div class="text-5xl text-purple-600 mb-4">🎉</div>
+            <h3 class="text-2xl font-bold text-purple-700 mb-4">Thank you for ordering Cheki with Stellaria 💫</h3>
+            <p class="text-gray-700 mb-6">We'll contact you soon with the details of your order.</p>
+            <button onclick="closeThankYouModal()"
+                class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Member data
+        const members = {
+            nae: {
+                name: "🧡NAE🧡",
+                image: "foto/Nae.jpg",
+                jiko: "Ba~ kyun!! Cahaya cinta yang menembus hatimu! Nyahoo~ Aku Nae ^,^♪",
+                tanggallahir: "19 February",
+                zodiac: "Pisces",
+                tinggibadan: "157cm",
+                goldarah: "AB",
+                mbti: "ENFJ",
+                hobi: "Cosplay,Menyanyi",
+                makananfavorit: "Bebek,Tiramisu Cake,Mango,Taro",
+                warnafavorit: "Merah,Orange,purple",
+            },
+            yuna: {
+                name: "💛YUNA💛",
+                image: "foto/Yuna.jpg",
+                jiko: "Seperti madu yang ‘kan maniskan hari harimu, Halo, aku Yunaaa~! 🐝✨",
+                tanggallahir: "27 Desember",
+                zodiac: "Capricorn",
+                tinggibadan: "157cm",
+                goldarah: "B",
+                mbti: "INTJ",
+                hobi: "Makeup & Dress up, Cosplay, Tidur",
+                makananfavorit: "Mie nyemek pake nugget, Apapun ga beracun (opsional)",
+                warnafavorit: "Ungu, Hitam, Biru, Kuning",
+            },
+            alice: {
+                name: "💜ALICE💜",
+                image: "foto/Alice.jpg",
+                jiko: "Si gadis ceria yang akan membawa kamu ke Wornderlad Panggil aku Alice~ 🐰✨",
+                tanggallahir: "7 November",
+                zodiac: "Scorpio",
+                tinggibadan: "160cm",
+                goldarah: "O",
+                mbti: "ENFJ",
+                hobi: "Wotagei,Fotography,Gaming",
+                makananfavorit: "Susu Stroberi,Roti,Sushi,Martabak",
+                warnafavorit: "Putih,Ungu,Hitam",
+            },
+            melody: {
+                name: "❤️MELODY❤️",
+                image: "foto/Melody.jpg",
+                jiko: "Seperti lagu favoritmu,bolehkah aku selalu temani hari-harimu?Halo, aku Melody! 🎵🍒",
+                tanggallahir: "13 November",
+                zodiac: "Scorpio",
+                tinggibadan: "155cm",
+                goldarah: "O",
+                mbti: "ENFP",
+                hobi: "Membaca,Menulis,Baking,Nailart",
+                makananfavorit: "Coklat,Mangga,Telor gulung",
+                warnafavorit: "Biru,Putih,Merah"
+            },
+            ella: {
+                name: "💚ELLA💚",
+                image: "foto/Ella.jpg",
+                jiko: "Seniman introvert yang akan melukis senyuman di wajahmu! Halo, aku Ella~ 🎨✨",
+                tanggallahir: "26 januari",
+                zodiac: "Aquarius",
+                tinggibadan: "162cm",
+                goldarah: "B",
+                mbti: "INFP",
+                hobi: "Menari,Cosplay,Menggambar",
+                makananfavorit: "Salmon,Sushi,Lemper,Mie Ayam,Mangut iwak pe",
+                warnafavorit: "Turqoise,Ungu"
+            },
+            group: {
+                name: "Group Cheki 🖤",
+                image: "foto/group2.jpg",
+                deskripsi: "Stellaria adalah grup idola yang berasal dari Malang, Indonesia. Grup ini mulai aktif sejak sekitar tahun 2023 dan terus berkembang hingga kini. Saat ini, Stellaria terdiri dari lima anggota berbakat: Alice, Nae, Yuna, Melody, dan Ella. Dengan semangat dan kekompakan mereka, Stellaria hadir membawa warna baru dalam dunia hiburan lokal, khususnya di skena idol independen Indonesia.",
+            }
+        };
+
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('stellaria-cart')) || [];
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function renderCartItems() {
+            const cartContainer = document.getElementById('cart-items');
+            const totalElement = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+                totalElement.textContent = 'Rp0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const price = item.name.includes('Group') ? 30000 : 25000;
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+
+                html += `
+                    <div class="flex items-center py-4 border-b">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="ml-4 flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-sm text-gray-500">${item.emoji} × ${item.quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">Rp${itemTotal}</p>
+                            <button onclick="removeFromCart(${index})" class="mt-1 text-sm text-purple-600 hover:text-purple-800">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartContainer.innerHTML = html;
+            totalElement.textContent = `Rp${total}`;
+        }
+
+        function addToCart(name, emoji, image) {
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name,
+                    emoji,
+                    image,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('stellaria-cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+
+            // Show a small notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-purple-600 text-white px-4 py-2 rounded-lg shadow-lg';
+            notification.textContent = `${name} added to cart!`;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'translate-y-2', 'transition');
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('stellaria-cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function clearCart() {
+            cart = [];
+            localStorage.setItem('stellaria-cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            document.getElementById('checkout-modal').classList.add('active');
+        }
+         function getCartSummary() {
+    const cart = JSON.parse(localStorage.getItem('stellaria-cart')) || [];
+    let items = '';
+    let total = 0;
+
+    cart.forEach(item => {
+      const price = item.name.includes("Group") ? 30000 : 25000;
+      const subtotal = price * item.quantity;
+      total += subtotal;
+      items += `${item.name} (${item.quantity}x @Rp${price}) = Rp${subtotal}\n`;
+    });
+
+    return { items, total };
+  }
+
+        function completeOrder(event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('payment-proof');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert('Silakan upload bukti pembayaran terlebih dahulu.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async function () {
+    const base64Data = reader.result.split(',')[1];
+    const cartData = getCartSummary(); // ambil data cart
+
+    const formData = new URLSearchParams();
+    formData.append("nama", document.getElementById('fullname').value);
+    formData.append("email", document.getElementById('email').value);
+    formData.append("no", document.getElementById('phone').value);
+    formData.append("ig", document.getElementById('instagram').value);
+    formData.append("file", base64Data);
+    formData.append("items", cartData.items);
+    formData.append("total", cartData.total);
+
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyEsAtshTNeuubUL0mZ_9pO9N9UvsHwJO-9fLEM0CZ6hWXjmUetPD9ybDChhOPmNhy4/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData.toString()
+      });
+
+      const result = await response.text();
+      console.log("Respon server:", result);
+
+      if (response.ok) {
+        clearCart();
+        document.getElementById('checkout-modal').classList.remove('active');
+        document.getElementById('thankyou-modal').classList.add('active');
+        document.getElementById('checkout-form').reset();
+      } else {
+        alert("Gagal mengirim data: " + result);
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+      alert("Terjadi kesalahan saat mengirim data.");
+    }
+  };
+
+  reader.readAsDataURL(file);
+}
+
+        // Modal functionality
+        function openModal(memberId) {
+            const member = members[memberId];
+            const modal = document.getElementById('modal');
+
+            document.getElementById('modal-title').textContent = member.name;
+            document.getElementById('modal-image').src = member.image || 'fallback.jpg';
+
+            let contentHtml = '';
+
+            if (memberId === 'group') {
+                // Hanya deskripsi untuk Group Cheki
+                contentHtml = `<p class="text-gray-700">${member.deskripsi || '-'}</p>`;
+            } else {
+                // Detail lengkap untuk member biasa
+                contentHtml = `
+            <p><span class="font-medium">Jikoshoukai:</span> ${member.jiko || '-'}</p>
+            <p><span class="font-medium">Tanggal Lahir:</span> ${member.tanggallahir || '-'}</p>
+            <p><span class="font-medium">Zodiak:</span> ${member.zodiac || '-'}</p>
+            <p><span class="font-medium">Tinggi Badan:</span> ${member.tinggibadan || '-'}</p>
+            <p><span class="font-medium">Golongan Darah:</span> ${member.goldarah || '-'}</p>
+            <p><span class="font-medium">MBTI:</span> ${member.mbti || '-'}</p>
+            <p><span class="font-medium">Hobi:</span> ${member.hobi || '-'}</p>
+            <p><span class="font-medium">Makanan Favorit:</span> ${member.makananfavorit || '-'}</p>
+            <p><span class="font-medium">Warna Favorit:</span> ${member.warnafavorit || '-'}</p>
+        `;
+
+                if (member.facts && member.facts.length > 0) {
+                    contentHtml += `<div><span class="font-medium">Fun Facts:</span><ul class="list-disc list-inside mt-1">`;
+                    member.facts.forEach(fact => {
+                        contentHtml += `<li>${fact}</li>`;
+                    });
+                    contentHtml += `</ul></div>`;
+                }
+            }
+
+            document.getElementById('modal-content').innerHTML = contentHtml;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.remove('active');
+        }
+
+        function closeThankYouModal() {
+            document.getElementById('thankyou-modal').classList.remove('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            renderCartItems();
+
+            document.getElementById('checkout-form').addEventListener('submit', completeOrder);
+
+            // Close modals when clicking outside
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
