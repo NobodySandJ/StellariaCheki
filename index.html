@@ -26,6 +26,23 @@
             font-family: 'Poppins', sans-serif;
             background-color: #fdfaff;
         }
+        /* Style untuk Accordion FAQ */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 1.5rem; /* px-6 */
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Sesuaikan jika jawaban sangat panjang */
+            padding: 0 1.5rem 1.5rem; /* px-6 pb-6 */
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease-in-out;
+        }
         .slider-container {
             position: relative;
             aspect-ratio: 1 / 1;
@@ -136,6 +153,7 @@
                 <a href="#home" class="nav-link text-purple-600 font-semibold active">Home</a>
                 <a href="#members" class="nav-link text-slate-600 hover:text-purple-600 font-medium">Members</a>
                 <a href="#schedule" class="nav-link text-slate-600 hover:text-purple-600 font-medium">Schedule</a>
+                <a href="#faq" class="nav-link text-slate-600 hover:text-purple-600 font-medium">FAQ</a>
                 <a href="#cart" class="text-slate-600 hover:text-purple-600 relative">
                     <i class="fas fa-shopping-cart fa-lg"></i>
                     <span id="cart-count" class="cart-badge hidden">0</span>
@@ -164,6 +182,8 @@
              <a href="#home" class="nav-link text-purple-600 font-semibold active">Home</a>
              <a href="#members" class="nav-link text-slate-600 hover:text-purple-600 font-medium">Members</a>
              <a href="#schedule" class="nav-link text-slate-600 hover:text-purple-600 font-medium">Schedule</a>
+             <a href="#faq" class="nav-link text-slate-600 hover:text-purple-600 font-medium">FAQ</a>
+             <a href="#cart" class="nav-link text-slate-600 hover:text-purple-600 font-medium">My Cart</a>
         </nav>
     </header>
     
@@ -220,7 +240,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Affectionate, Expressive, Playful</p>
                             <button onclick="openModal('nae')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Profile</button>
-                            <button onclick="addToCart('Nae', '🧡', 'foto/Nae.jpg')" class="w-full mt-2 bg-orange-500 text-white font-semibold py-2.5 rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Nae', members.nae.fullName, 'foto/Nae.jpg')" class="w-full mt-2 bg-orange-500 text-white font-semibold py-2.5 rounded-lg hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                     <div class="member-card bg-white rounded-2xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -233,7 +253,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Independent, Quirky, Stylish</p>
                             <button onclick="openModal('yuna')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Profile</button>
-                            <button onclick="addToCart('Yuna', '💛', 'foto/Yuna.jpg')" class="w-full mt-2 bg-yellow-500 text-white font-semibold py-2.5 rounded-lg hover:bg-yellow-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Yuna', members.yuna.fullName, 'foto/Yuna.jpg')" class="w-full mt-2 bg-yellow-500 text-white font-semibold py-2.5 rounded-lg hover:bg-yellow-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                     <div class="member-card bg-white rounded-2xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -246,7 +266,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Cheerful, Imaginative, Energetic</p>
                             <button onclick="openModal('alice')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Profile</button>
-                            <button onclick="addToCart('Alice', '💜', 'foto/Alice.jpg')" class="w-full mt-2 bg-purple-500 text-white font-semibold py-2.5 rounded-lg hover:bg-purple-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Alice', members.alice.fullName, 'foto/Alice.jpg')" class="w-full mt-2 bg-purple-500 text-white font-semibold py-2.5 rounded-lg hover:bg-purple-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                     <div class="member-card bg-white rounded-2xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -259,7 +279,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Warmhearted, Creative, Charming</p>
                             <button onclick="openModal('melody')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Profile</button>
-                            <button onclick="addToCart('Melody', '❤️', 'foto/Melody.jpg')" class="w-full mt-2 bg-red-500 text-white font-semibold py-2.5 rounded-lg hover:bg-red-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Melody', members.melody.fullName, 'foto/Melody.jpg')" class="w-full mt-2 bg-red-500 text-white font-semibold py-2.5 rounded-lg hover:bg-red-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                     <div class="member-card bg-white rounded-2xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -272,7 +292,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Artistic, Gentle, Dreamy</p>
                             <button onclick="openModal('ella')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Profile</button>
-                            <button onclick="addToCart('Ella', '💚', 'foto/Ella.jpg')" class="w-full mt-2 bg-green-500 text-white font-semibold py-2.5 rounded-lg hover:bg-green-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Ella', members.ella.fullName, 'foto/Ella.jpg')" class="w-full mt-2 bg-green-500 text-white font-semibold py-2.5 rounded-lg hover:bg-green-600 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                      <div class="member-card bg-white rounded-2xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
@@ -285,7 +305,7 @@
                         <div class="p-5">
                             <p class="text-slate-500 mb-4 text-sm">Photo with all members.</p>
                             <button onclick="openModal('group')" class="w-full bg-purple-100 text-purple-700 font-semibold py-2.5 rounded-lg hover:bg-purple-200 transition-all duration-300">View Details</button>
-                            <button onclick="addToCart('Group Cheki', '🖤', 'foto/group2.jpg')" class="w-full mt-2 bg-slate-800 text-white font-semibold py-2.5 rounded-lg hover:bg-slate-900 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
+                            <button onclick="addToCart('Group Cheki', members.group.fullName, 'foto/group2.jpg')" class="w-full mt-2 bg-slate-800 text-white font-semibold py-2.5 rounded-lg hover:bg-slate-900 transition-all duration-300 shadow-md hover:shadow-lg">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -296,13 +316,20 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-extrabold text-center text-purple-700 mb-16">Schedule</h2>
                 <div class="max-w-7xl mx-auto p-4 md:p-8">
-                    <div id="schedule-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                        </div>
+                    <div id="schedule-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"></div>
                 </div>
             </div>
         </section>
 
-        <section id="cart" class="py-24 bg-white">
+        <section id="faq" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-center text-purple-700 mb-16">FAQ</h2>
+                <div id="faq-container" class="max-w-3xl mx-auto space-y-4">
+                </div>
+            </div>
+        </section>
+
+        <section id="cart" class="py-24 bg-slate-50">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-extrabold text-center text-purple-700 mb-16">Your Cart</h2>
                 <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -342,6 +369,7 @@
                     <a href="https://www.whatsapp.com/channel/0029VaxeSCKFcow3VXkvkK0x" class="text-purple-300 hover:text-green-400 transition-colors duration-300 text-2xl"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/stellaria.official/" class="text-purple-300 hover:text-pink-400 transition-colors duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.youtube.com/@stellaria.official" class="text-purple-300 hover:text-red-500 transition-colors duration-300 text-2xl"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-purple-300 hover:text-cyan-400 transition-colors duration-300 text-2xl"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
             <div class="mt-10 border-t border-purple-800 pt-8 text-center text-purple-400 text-sm">
@@ -424,7 +452,7 @@
         <div class="modal-content-inner bg-white rounded-2xl max-w-md w-full mx-4 p-8 text-center shadow-2xl">
             <div class="text-6xl text-purple-600 mb-4 animate-bounce">🎉</div>
             <h3 class="text-2xl font-bold text-purple-700 mb-4">Terima Kasih Atas Pesanan Anda! 💫</h3>
-            <p class="text-slate-700 mb-6">Kami akan segera menghubungi Anda. Mohon periksa Email Anda untuk detail pesanan.</p>
+            <p class="text-slate-700 mb-6">Kami akan segera menghubungi Anda. Mohon periksa WhatsApp Anda untuk detail pesanan.</p>
             <button onclick="closeThankYouModal()" class="px-8 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-purple-300">
                 Tutup
             </button>
@@ -450,32 +478,34 @@
         };
 
         // ====================================================================================
+        // || EDIT FAQ DI SINI ||
+        // ====================================================================================
+        const faqs = [
+            { question: "Apa itu Cheki?", answer: "Cheki adalah foto instan (seperti polaroid) yang diambil bersama member idol. Ini adalah cara populer bagi fans untuk mendapatkan kenang-kenangan pribadi dengan idola favorit mereka." },
+            { question: "Bagaimana jika saya berhalangan hadir di event?", answer: "Tidak masalah. Jika Anda sudah membayar, Cheki Anda akan tetap diambil oleh tim kami. Kami bisa mengirimkannya ke alamat Anda (ongkos kirim ditanggung pemesan) atau bisa Anda ambil di event berikutnya. Silakan hubungi contact person kami." },
+            { question: "Bolehkah saya meminta pose tertentu saat Cheki?", answer: "Tentu saja! Selama posenya sopan dan tidak melanggar aturan, Anda bebas berekspresi bersama member. Diskusikan pose yang Anda inginkan dengan member saat giliran Anda." },
+            { question: "Apakah tiket Cheki bisa digunakan di event lain?", answer: "Tiket Cheki yang dibeli untuk satu event hanya berlaku untuk event tersebut, kecuali ada pengumuman khusus dari kami. Ini untuk memastikan semua fans mendapatkan kesempatan yang sama di setiap acara." }
+        ];
+
+        // ====================================================================================
+        // || EDIT LINEUP UNTUK EVENT TERDEKAT DI SINI ||
+        // ====================================================================================
+        const NEXT_EVENT_LINEUP = {
+            eventTitle: "Ma chung university",
+            lineup: {
+                nae: true, yuna: true, alice: true, melody: true, ella: true,
+            }
+        };
+
+        // ====================================================================================
         // || EDIT JADWAL EVENT DI SINI ||
         // ====================================================================================
         const events = [
-            {
-                date: "5 Agustus 2025",
-                title: "Live Performance @ City Fest",
-                time: "8:00 PM - 9:00 PM",
-                status: 'upcoming',
-                lineup: ['Alice', 'Nae', 'Yuna', 'Melody', 'Ella'],
-                absent: []
-            },
-            {
+             {
                 date: "27 Juli 2025",
-                title: "Cheki Session @ Malang Town Square",
+                title: "Ma chung university",
                 time: "2:00 PM - 5:00 PM",
-                status: 'upcoming',
-                lineup: ['Alice', 'Nae', 'Yuna', 'Melody'],
-                absent: ['Ella']
-            },
-            {
-                date: "10 Juli 2025",
-                title: "Mini Fan Meeting",
-                time: "7:00 PM - 9:00 PM",
-                status: 'finished',
-                lineup: ['Alice', 'Nae', 'Melody', 'Ella'],
-                absent: ['Yuna']
+                status: 'upcoming'
             },
         ];
 
@@ -484,52 +514,93 @@
         // ====================================================================================
         const members = {
             nae: {
-                name: "🧡NAE🧡",
-                color: 'text-orange-500',
-                jiko: "Ba~ kyun!! Cahaya cinta yang menembus hatimu! Nyahoo~ Aku Nae ^,^♪",
-                ig: 'evilnae_',
-                tiktok: 'evilnae',
-                photos: ['foto/Nae.jpg', 'foto/gallery/f-nae1.jpg', 'foto/gallery/f-nae2.jpg'],
-                tanggallahir: "19 February", zodiac: "Pisces", tinggibadan: "157cm", goldarah: "AB", mbti: "ENFJ", hobi: "Cosplay, Menyanyi", makananfavorit: "Bebek, Tiramisu Cake, Mango, Taro", warnafavorit: "Merah, Orange, purple"
+                name: "Nae",
+                fullName: "🧡NAE🧡", 
+                color: 'text-orange-500', 
+                jiko: "Ba~ kyun!! Cahaya cinta yang menembus hatimu! Nyahoo~ Aku Nae ^,^♪", 
+                ig: 'evilnae_', 
+                tiktok: 'evilnae', 
+                photos: ['foto/Nae.jpg', 'foto/gallery/f-nae1.jpg', 'foto/gallery/f-nae2.jpg'], 
+                tanggallahir: "19 February", 
+                zodiac: "Pisces", 
+                tinggibadan: "157cm", 
+                goldarah: "AB", 
+                mbti: "ENFJ", 
+                hobi: "Cosplay, Menyanyi", 
+                makananfavorit: "Bebek, Tiramisu Cake, Mango, Taro", 
+                warnafavorit: "Merah, Orange, purple"
             },
             yuna: {
-                name: "💛YUNA💛",
-                color: 'text-yellow-500',
-                jiko: "Seperti madu yang ‘kan maniskan hari harimu, Halo, aku Yunaaa~! 🐝✨",
-                ig: 'hokaitto',
-                tiktok: 'hokaitto',
-                photos: ['foto/Yuna.jpg', 'foto/gallery/f-yuna1.jpg', 'foto/gallery/f-yuna2.jpg'],
-                tanggallahir: "27 Desember", zodiac: "Capricorn", tinggibadan: "157cm", goldarah: "B", mbti: "INTJ", hobi: "Makeup & Dress up, Cosplay, Tidur", makananfavorit: "Mie nyemek pake nugget, Apapun ga beracun (opsional)", warnafavorit: "Ungu, Hitam, Biru, Kuning"
+                name: "Yuna",
+                fullName: "💛YUNA💛", 
+                color: 'text-yellow-500', 
+                jiko: "Seperti madu yang ‘kan maniskan hari harimu, Halo, aku Yunaaa~! 🐝✨", 
+                ig: 'hokaitto', 
+                tiktok: 'hokaitto', 
+                photos: ['foto/Yuna.jpg', 'foto/gallery/f-yuna1.jpg', 'foto/gallery/f-yuna2.jpg'], 
+                tanggallahir: "27 Desember", 
+                zodiac: "Capricorn", 
+                tinggibadan: "157cm", 
+                goldarah: "B", 
+                mbti: "INTJ", 
+                hobi: "Makeup & Dress up, Cosplay, Tidur",
+                makananfavorit: "Mie nyemek pake nugget, Apapun ga beracun (opsional)", 
+                warnafavorit: "Ungu, Hitam, Biru, Kuning"
             },
             alice: {
-                name: "💜ALICE💜",
-                color: 'text-purple-600',
-                jiko: "Si gadis ceria yang akan membawa kamu ke Wornderlad Panggil aku Alice~ 🐰✨",
-                ig: 'alicelyn__',
-                tiktok: 'alicelyn',
-                photos: ['foto/Alice.jpg', 'foto/gallery/f-alice1.jpg', 'foto/gallery/f-alice2.jpg'],
-                tanggallahir: "7 November", zodiac: "Scorpio", tinggibadan: "160cm", goldarah: "O", mbti: "ENFJ", hobi: "Wotagei, Fotography, Gaming", makananfavorit: "Susu Stroberi, Roti, Sushi, Martabak", warnafavorit: "Putih, Ungu, Hitam"
+                name: "Alice",
+                fullName: "💜ALICE💜", 
+                color: 'text-purple-600', 
+                jiko: "Si gadis ceria yang akan membawa kamu ke Wornderlad Panggil aku Alice~ 🐰✨", 
+                ig: 'alicelyn__', 
+                tiktok: 'arisurisuu_', 
+                photos: ['foto/Alice.jpg', 'foto/gallery/f-alice1.jpg', 'foto/gallery/f-alice2.jpg'], 
+                tanggallahir: "7 November", 
+                zodiac: "Scorpio", 
+                tinggibadan: "160cm", 
+                goldarah: "O", 
+                mbti: "ENFJ", 
+                hobi: "Wotagei, Fotography, Gaming", 
+                makananfavorit: "Susu Stroberi, Roti, Sushi, Martabak", 
+                warnafavorit: "Putih, Ungu, Hitam"
             },
             melody: {
-                name: "❤️MELODY❤️",
-                color: 'text-red-500',
-                jiko: "Seperti lagu favoritmu, bolehkah aku selalu temani hari-harimu? Halo, aku Melody! 🎵🍒",
-                ig: 'lodehehe',
-                tiktok: '',
-                photos: ['foto/Melody.jpg', 'foto/gallery/f-melody1.jpg', 'foto/gallery/f-melody2.jpg'],
-                tanggallahir: "13 November", zodiac: "Scorpio", tinggibadan: "155cm", goldarah: "O", mbti: "ENFP", hobi: "Membaca, Menulis, Baking, Nailart", makananfavorit: "Coklat, Mangga, Telor gulung", warnafavorit: "Biru, Putih, Merah"
+                name: "Melody",
+                fullName: "❤️MELODY❤️", 
+                color: 'text-red-500', 
+                jiko: "Seperti lagu favoritmu, bolehkah aku selalu temani hari-harimu? Halo, aku Melody! 🎵🍒", 
+                ig: 'lodehehe', 
+                tiktok: 'mango.sodium', 
+                photos: ['foto/Melody.jpg', 'foto/gallery/f-melody1.jpg', 'foto/gallery/f-melody2.jpg'], 
+                tanggallahir: "13 November", 
+                zodiac: "Scorpio", 
+                tinggibadan: "155cm", 
+                goldarah: "O", 
+                mbti: "ENFP", 
+                hobi: "Membaca, Menulis, Baking, Nailart", 
+                makananfavorit: "Coklat, Mangga, Telor gulung", 
+                warnafavorit: "Biru, Putih, Merah"
             },
             ella: {
-                name: "💚ELLA💚",
-                color: 'text-green-500',
-                jiko: "Seniman introvert yang akan melukis senyuman di wajahmu! Halo, aku Ella~ 🎨✨",
-                ig: 'salmonelix',
-                tiktok: 'salmonelix',
-                photos: ['foto/Ella.jpg', 'foto/gallery/f-ella1.jpg', 'foto/gallery/f-ella2.jpg'],
-                tanggallahir: "26 januari", zodiac: "Aquarius", tinggibadan: "162cm", goldarah: "B", mbti: "INFP", hobi: "Menari, Cosplay, Menggambar", makananfavorit: "Salmon, Sushi, Lemper, Mie Ayam, Mangut iwak pe", warnafavorit: "Turqoise, Ungu"
+                name: "Ella",
+                fullName: "💚ELLA💚", 
+                color: 'text-green-500', 
+                jiko: "Seniman introvert yang akan melukis senyuman di wajahmu! Halo, aku Ella~ 🎨✨", 
+                ig: 'salmonelix', 
+                tiktok: 'salmonelix', 
+                photos: ['foto/Ella.jpg', 'foto/gallery/f-ella1.jpg', 'foto/gallery/f-ella2.jpg'], 
+                tanggallahir: "26 januari", 
+                zodiac: "Aquarius", 
+                tinggibadan: "162cm", 
+                goldarah: "B", 
+                mbti: "INFP", 
+                hobi: "Menari, Cosplay, Menggambar", 
+                makananfavorit: "Salmon, Sushi, Lemper, Mie Ayam, Mangut iwak pe", 
+                warnafavorit: "Turqoise, Ungu"
             },
             group: {
-                name: "Group Cheki 🖤",
+                name: "Group Cheki",
+                fullName: "Group Cheki 🖤",
                 color: 'text-slate-800',
                 photos: ['foto/group2.jpg'],
                 deskripsi: "Stellaria adalah grup idola yang berasal dari Malang, Indonesia..."
@@ -599,12 +670,12 @@
             });
         }
         
-        function addToCart(name, emoji, image) {
-            const existingItemIndex = cart.findIndex(item => item.name === name);
+        function addToCart(name, fullName, image) {
+            const existingItemIndex = cart.findIndex(item => item.name === fullName);
             if (existingItemIndex > -1) {
                 updateItemQuantity(existingItemIndex, 1);
             } else {
-                cart.push({ name, emoji, image, quantity: 1 });
+                cart.push({ name: fullName, image, quantity: 1 });
             }
             localStorage.setItem('stellaria-cart', JSON.stringify(cart));
             updateCartCount();
@@ -656,7 +727,7 @@
             
             modalTitleEl.className = 'text-2xl font-bold';
             modalTitleEl.classList.add(member.color);
-            modalTitleEl.textContent = member.name;
+            modalTitleEl.textContent = member.fullName;
             
             slider.innerHTML = '';
             dotsContainer.innerHTML = '';
@@ -753,7 +824,7 @@
                     fileName: fileInput.files[0].name,
                 };
                 
-                const scriptURL = "https://script.google.com/macros/s/AKfycbxXeYgWICPYnFN-T5sjdqTWm8sEtD1g1HgQyp2lZUJh_D87f3BJNLWeQwsnQ96d1ZUR/exec"; 
+                const scriptURL = "https://script.google.com/macros/s/AKfycbwT1XBqUHACgue-qA68q9ZMo6guDN6y_qGWFNsQmG8UM8xhxyVp3WlUJ61HrRUS6ma6/exec"; 
 
                 try {
                     const response = await fetch(scriptURL, { method: 'POST', body: JSON.stringify(payload) });
@@ -787,27 +858,88 @@
                 container.innerHTML = '<p class="text-center text-slate-500 col-span-full">Belum ada jadwal event.</p>';
                 return;
             }
+
+            let firstUpcomingFound = false;
+
             events.forEach(event => {
                 const isFinished = event.status === 'finished';
                 const cardClasses = isFinished 
                     ? 'bg-white/60 opacity-60' 
                     : 'bg-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300';
-                let lineupHtml = event.lineup.map(member => `<li class="flex items-center"><span class="mr-2">✅</span>${member}</li>`).join('');
-                let absentHtml = '';
-                if (event.absent.length > 0) {
-                    absentHtml = `<h4 class="font-bold text-sm text-red-600 mt-3 mb-1">Berhalangan</h4><ul class="space-y-1 text-sm text-slate-600">${event.absent.map(member => `<li class="flex items-center"><span class="mr-2">❌</span>${member}</li>`).join('')}</ul>`;
+                
+                let lineupDetailsHtml = '';
+                if (!isFinished && !firstUpcomingFound) {
+                    let presentMembers = [];
+                    let absentMembers = [];
+
+                    for (const memberKey in NEXT_EVENT_LINEUP.lineup) {
+                        if (NEXT_EVENT_LINEUP.lineup[memberKey]) {
+                            presentMembers.push(members[memberKey].name);
+                        } else {
+                            absentMembers.push(members[memberKey].name);
+                        }
+                    }
+
+                    let lineupHtml = presentMembers.map(member => `<li class="flex items-center"><span class="mr-2">✅</span>${member}</li>`).join('');
+                    let absentHtml = '';
+                    if (absentMembers.length > 0) {
+                        absentHtml = `<h4 class="font-bold text-sm text-red-600 mt-3 mb-1">Berhalangan</h4><ul class="space-y-1 text-sm text-slate-600">${absentMembers.map(member => `<li class="flex items-center"><span class="mr-2">❌</span>${member}</li>`).join('')}</ul>`;
+                    }
+                    
+                    lineupDetailsHtml = `<div class="text-left mt-4 pt-4 border-t border-purple-200"><h4 class="font-bold text-sm text-green-600 mb-1">Lineup</h4><ul class="space-y-1 text-sm text-slate-600">${lineupHtml}</ul>${absentHtml}</div>`;
+                    firstUpcomingFound = true;
                 }
-                const eventCardHtml = `<div class="${cardClasses} p-6 rounded-2xl border border-purple-100 flex flex-col"><div class="flex-grow"><p class="text-sm font-semibold text-purple-600 mb-1">${event.date} ${isFinished ? '<span class="text-xs font-normal text-red-500">(Selesai)</span>' : ''}</p><h3 class="text-xl font-bold text-slate-800">${event.title}</h3><p class="text-sm text-slate-500 mt-1 mb-4">${event.time}</p><div class="text-left"><h4 class="font-bold text-sm text-green-600 mb-1">Lineup</h4><ul class="space-y-1 text-sm text-slate-600">${lineupHtml}</ul>${absentHtml}</div></div></div>`;
+
+                const eventCardHtml = `<div class="${cardClasses} p-6 rounded-2xl border border-purple-100 flex flex-col"><div class="flex-grow"><p class="text-sm font-semibold text-purple-600 mb-1">${event.date} ${isFinished ? '<span class="text-xs font-normal text-red-500">(Selesai)</span>' : ''}</p><h3 class="text-xl font-bold text-slate-800">${event.title}</h3><p class="text-sm text-slate-500 mt-1 mb-4">${event.time}</p>${lineupDetailsHtml}</div></div>`;
                 container.innerHTML += eventCardHtml;
             });
         }
         
+        function renderFaq() {
+            const container = document.getElementById('faq-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            faqs.forEach(faq => {
+                const faqItemHtml = `
+                    <div class="faq-item bg-white rounded-xl shadow-sm overflow-hidden border border-slate-200/80">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 md:p-5">
+                            <span class="font-semibold text-purple-800">${faq.question}</span>
+                            <span class="faq-icon text-purple-600 text-xl font-light transform transition-transform duration-300">
+                                <i class="fas fa-chevron-down"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer text-slate-600">
+                            <p class="pb-4 px-4 md:px-5">${faq.answer}</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += faqItemHtml;
+            });
+
+            container.addEventListener('click', function(e) {
+                const questionButton = e.target.closest('.faq-question');
+                if (questionButton) {
+                    const faqItem = questionButton.parentElement;
+                    
+                    if (!faqItem.classList.contains('active')) {
+                        const allActiveItems = container.querySelectorAll('.faq-item.active');
+                        allActiveItems.forEach(item => {
+                            item.classList.remove('active');
+                        });
+                    }
+                    
+                    faqItem.classList.toggle('active');
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Render harga dinamis dari object CONFIG
             document.getElementById('price-member').textContent = formatter.format(CONFIG.hargaMemberCheki);
             document.getElementById('price-group').textContent = formatter.format(CONFIG.hargaGroupCheki);
 
             renderSchedule(); 
+            renderFaq();
             updateCartCount();
             renderCartItems();
             document.getElementById('checkout-form').addEventListener('submit', completeOrder);
