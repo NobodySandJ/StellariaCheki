@@ -3,7 +3,7 @@
 // ====================================================================================
 
 // GANTI dengan URL Google Script Anda yang sudah di-deploy
-const scriptURL = "https://script.google.com/macros/s/AKfycbz7sGObsXQ6ZU34GsB2BmsrhNCbGGnMTWNpZBgHQxolVQ7a3a0ykOM3CC8DWJ5SpXsj/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbynNa_F0glZnNXio_PblBdk9vpc_rFIuG9Z5eSBXyyiADKaKTCXAsX_rwyyyNg0pA3u/exec";
 
 // GANTI dengan Kunci Rahasia Anda. HARUS SAMA PERSIS dengan yang Anda simpan di Google Script.
 const API_KEY = "WhenStellariaMjk";
@@ -211,6 +211,8 @@ function updateItemQuantity(index, amount) {
 function renderCartItems() {
   const cartContainer = document.getElementById("cart-items");
   const totalElement = document.getElementById("cart-total");
+  if (!cartContainer || !totalElement) return;
+  
   if (cart.length === 0) {
     cartContainer.innerHTML =
       '<p class="text-slate-400 text-center py-8">Your cart is empty</p>';
@@ -280,7 +282,7 @@ function addToCart(name, fullName, image) {
   renderCartItems();
   const notification = document.createElement("div");
   notification.className =
-    "fixed bottom-5 right-5 bg-slate-200 text-slate-800 px-5 py-3 rounded-lg shadow-2xl text-sm font-semibold transform-gpu transition-all duration-300 translate-y-4 opacity-0";
+    "fixed bottom-5 right-5 bg-purple-600 text-white px-5 py-3 rounded-lg shadow-2xl text-sm font-semibold transform-gpu transition-all duration-300 translate-y-4 opacity-0";
   notification.textContent = `${name} added to cart!`;
   document.body.appendChild(notification);
   setTimeout(() => {
@@ -317,7 +319,6 @@ function getCartSummary() {
     total += subtotal;
     items += `${item.name} (${item.quantity}x @${formatter.format(price)}) = ${formatter.format(subtotal)}\n`;
   });
-  // Mengembalikan total dalam bentuk angka untuk perhitungan, dan teks untuk tampilan
   return { items, total, totalFormatted: formatter.format(total) };
 }
 
@@ -534,7 +535,7 @@ function renderSchedule() {
       : "bg-slate-800 shadow-lg hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300 border border-slate-700";
 
     let lineupDetailsHtml = "";
-    if (!isFinished && !firstUpcomingFound) {
+    if (!isFinished && !firstUpcomingFound && event.title === NEXT_EVENT_LINEUP.eventTitle) {
       let presentMembers = [];
       let absentMembers = [];
 
@@ -588,40 +589,33 @@ function renderFaq() {
 
   faqs.forEach((faq) => {
     const faqItemHtml = `
-                  <div class="faq-item bg-slate-800 rounded-xl shadow-sm overflow-hidden border border-slate-700">
-                      <button class="faq-question w-full flex justify-between items-center text-left p-4 md:p-5">
-                          <span class="font-semibold text-purple-300">${faq.question}</span>
-                          <span class="faq-icon text-purple-400 text-xl font-light transform transition-transform duration-300">
-                              <i class="fas fa-chevron-down"></i>
-                          </span>
-                      </button>
-                      <div class="faq-answer text-slate-400">
-                          <p class="pb-4 px-4 md:px-5">${faq.answer}</p>
-                      </div>
-                  </div>
-              `;
+      <div class="faq-item bg-slate-800 rounded-xl shadow-sm overflow-hidden border border-slate-700">
+          <button class="faq-question w-full flex justify-between items-center text-left p-4 md:p-5">
+              <span class="font-semibold text-purple-300">${faq.question}</span>
+              <span class="faq-icon text-purple-400 text-xl font-light transform transition-transform duration-300">
+                  <i class="fas fa-chevron-down"></i>
+              </span>
+          </button>
+          <div class="faq-answer text-slate-400">
+              <p class="pb-4 px-4 md:px-5">${faq.answer}</p>
+          </div>
+      </div>
+    `;
     container.innerHTML += faqItemHtml;
   });
 
-  container.addEventListener("click", function (e) {
-    const questionButton = e.target.closest(".faq-question");
-    if (questionButton) {
-      const faqItem = questionButton.parentElement;
-
-      if (!faqItem.classList.contains("active")) {
-        const allActiveItems =
-          container.querySelectorAll(".faq-item.active");
-        allActiveItems.forEach((item) => {
-          item.classList.remove("active");
-        });
-      }
-
+  // Tambahkan event listener untuk membuka/menutup FAQ setelah dirender
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const faqItem = button.parentElement;
       faqItem.classList.toggle("active");
-    }
+    });
   });
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Menampilkan harga dari konfigurasi
   document.getElementById("price-member").textContent = formatter.format(
     CONFIG.hargaMemberCheki
   );
@@ -629,21 +623,29 @@ document.addEventListener("DOMContentLoaded", () => {
     CONFIG.hargaGroupCheki
   );
 
+  // Merender komponen dinamis
   renderSchedule();
   renderFaq();
+
+  // Memperbarui tampilan keranjang belanja saat halaman dimuat
   updateCartCount();
   renderCartItems();
-  document
-    .getElementById("checkout-form")
-    .addEventListener("submit", completeOrder);
 
+  // Menambahkan event listener ke form checkout
+  const checkoutForm = document.getElementById("checkout-form");
+  if(checkoutForm) {
+    checkoutForm.addEventListener("submit", completeOrder);
+  }
+
+  // Fungsionalitas untuk menu mobile (hamburger menu)
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   if (menuToggle && mobileMenu) {
-    const mobileNavLinks = mobileMenu.querySelectorAll("a");
+    const mobileNavLinks = mobileMenu.querySelectorAll("a.nav-link");
     menuToggle.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
     });
+    // Sembunyikan menu setelah link di-klik
     mobileNavLinks.forEach((link) => {
       link.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
@@ -651,6 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Mengatur link navigasi aktif berdasarkan posisi scroll
   const sections = document.querySelectorAll("main section");
   const navLinks = document.querySelectorAll(
     "#desktop-menu a.nav-link, #mobile-menu a.nav-link"
@@ -676,6 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(section);
   });
 
+  // Fungsionalitas untuk menutup modal
   document.querySelectorAll(".modal").forEach((modal) => {
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
@@ -690,4 +694,30 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach((modal) => modal.classList.remove("active"));
     }
   });
+
+  // =======================================================
+  // || KODE BARU: Pemicu untuk Login Admin               ||
+  // =======================================================
+  const copyrightFooter = document.getElementById("copyright-footer");
+  let clickCount = 0;
+  let clickTimer = null;
+
+  if (copyrightFooter) {
+    copyrightFooter.addEventListener('click', () => {
+      clickCount++;
+
+      if (clickTimer) {
+        clearTimeout(clickTimer);
+      }
+      
+      if (clickCount >= 5) {
+        window.open('admin.html', '_blank');
+        clickCount = 0; 
+      }
+      
+      clickTimer = setTimeout(() => {
+        clickCount = 0;
+      }, 1000); 
+    });
+  }
 });
