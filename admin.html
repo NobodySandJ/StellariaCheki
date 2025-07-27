@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stellaria - Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="foto/logo.jpg" type="image/png" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -95,28 +96,34 @@
 
         <div class="content-card rounded-xl shadow-lg overflow-hidden">
             <div class="p-6 flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-purple-300">Order List</h2>
-                <button id="refresh-button" class="px-4 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-500 transition">
-                    Refresh Data
-                </button>
-            </div>
+    <h2 class="text-2xl font-bold text-purple-300">Order List</h2>
+    <div class="flex items-center gap-4">
+        <a href="https://docs.google.com/spreadsheets/d/1GQEBIsNTjvXpWzxYZYVNaOgGDTEDSwGuPv8otwBFefY/edit?gid=0#gid=0" target="_blank" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition">
+            Open Sheet
+        </a>
+        <button id="refresh-button" class="px-4 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-500 transition">
+            Refresh Data
+        </button>
+    </div>
+</div>
             <div id="loader" class="text-center py-16">
                 <p class="text-lg">Loading data, please wait...</p>
             </div>
             <div class="overflow-x-auto">
                 <table id="orders-table" class="w-full min-w-[1000px] hidden">
+                    
                     <thead>
-                        <tr>
-                            <th class="w-16">Done</th>
-                            <th>Timestamp</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>WhatsApp</th>
-                            <th>Order Details</th>
-                            <th>Total</th>
-                            <th>Payment Proof</th>
-                        </tr>
-                    </thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>WhatsApp</th>
+        <th>Order Details</th>
+        <th>Total</th>
+        <th>Payment Proof</th>
+    </tr>
+</thead>
+                    
                     <tbody id="orders-tbody">
                         </tbody>
                 </table>

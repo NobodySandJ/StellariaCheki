@@ -3,7 +3,7 @@
 // ====================================================================================
 
 // GANTI dengan URL Google Script Anda yang sudah di-deploy
-const scriptURL = "https://script.google.com/macros/s/AKfycbxSFFpRMLrM8vvV7QyjaECIdtzuWqWsyUj7zmFh9GhovEexdd7ojq_h8cfjBNP-gNz4/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbynNa_F0glZnNXio_PblBdk9vpc_rFIuG9Z5eSBXyyiADKaKTCXAsX_rwyyyNg0pA3u/exec";
 
 // GANTI dengan Kunci Rahasia Anda. HARUS SAMA PERSIS dengan yang Anda simpan di Google Script.
 const API_KEY = "WhenStellariaMjk";
@@ -282,7 +282,7 @@ function addToCart(name, fullName, image) {
   renderCartItems();
   const notification = document.createElement("div");
   notification.className =
-    "fixed bottom-5 right-5 bg-slate-200 text-slate-800 px-5 py-3 rounded-lg shadow-2xl text-sm font-semibold transform-gpu transition-all duration-300 translate-y-4 opacity-0";
+    "fixed bottom-5 right-5 bg-purple-600 text-white px-5 py-3 rounded-lg shadow-2xl text-sm font-semibold transform-gpu transition-all duration-300 translate-y-4 opacity-0";
   notification.textContent = `${name} added to cart!`;
   document.body.appendChild(notification);
   setTimeout(() => {
