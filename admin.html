@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellaria - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #cbd5e1;
+        }
+        .login-card, .content-card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+        }
+        .summary-card {
+            background-color: #334155;
+            border: 1px solid #475569;
+        }
+        th, td {
+            border-bottom: 1px solid #334155;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+        tr:nth-child(even) {
+            background-color: #283446;
+        }
+        tr:hover {
+            background-color: #3d4a5f;
+        }
+        .status-checkbox:checked {
+            background-color: #8b5cf6;
+            border-color: #8b5cf6;
+        }
+        .status-done {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-section" class="min-h-screen flex items-center justify-center p-4">
+        <div class="login-card w-full max-w-md p-8 rounded-xl shadow-lg">
+            <h1 class="text-3xl font-bold text-center text-purple-400 mb-2">Stellaria Admin</h1>
+            <p class="text-center text-slate-400 mb-6">Please log in to continue</p>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="username" class="block mb-2 text-sm font-medium text-slate-300">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" required>
+                </div>
+                <div class="mb-6">
+    <label for="password" class="block mb-2 text-sm font-medium text-slate-300">Password</label>
+    <div class="relative">
+        <input type="password" id="password" class="w-full pl-4 pr-10 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition" required>
+        <button type="button" id="toggle-password" class="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400 hover:text-purple-400">
+            <i id="toggle-icon" class="fas fa-eye"></i>
+        </button>
+    </div>
+</div>
+                <button type="submit" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-lg hover:bg-purple-700 transition">Login</button>
+                <p id="login-error" class="text-red-500 text-center text-sm mt-4"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="hidden p-4 md:p-8">
+        <div class="flex justify-between items-center mb-8">
+             <h1 class="text-3xl font-bold text-purple-400">Admin Dashboard</h1>
+             <button id="logout-button" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">Logout</button>
+        </div>
+       
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-purple-300 mb-4">Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="summary-card p-6 rounded-lg shadow-md">
+                    <h3 class="text-slate-300 font-semibold">Total Revenue</h3>
+                    <p id="total-revenue" class="text-2xl font-bold text-green-400 mt-1">Rp0</p>
+                </div>
+                <div class="summary-card p-6 rounded-lg shadow-md col-span-1 md:col-span-1 lg:col-span-3">
+                     <h3 class="text-slate-300 font-semibold mb-2">Cheki Sales per Member</h3>
+                     <div id="member-summary" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card rounded-xl shadow-lg overflow-hidden">
+            <div class="p-6 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-purple-300">Order List</h2>
+                <button id="refresh-button" class="px-4 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-500 transition">
+                    Refresh Data
+                </button>
+            </div>
+            <div id="loader" class="text-center py-16">
+                <p class="text-lg">Loading data, please wait...</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="orders-table" class="w-full min-w-[1000px] hidden">
+                    <thead>
+                        <tr>
+                            <th class="w-16">Done</th>
+                            <th>Timestamp</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>WhatsApp</th>
+                            <th>Order Details</th>
+                            <th>Total</th>
+                            <th>Payment Proof</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
