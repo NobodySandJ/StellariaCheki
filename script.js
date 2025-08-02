@@ -459,12 +459,12 @@ function initializeApp() {
     
     // Tambahkan event listener ke tombol "Add to Cart"
     // Ini perlu diatur ulang di sini karena tombol-tombolnya sekarang bergantung pada data
-    document.querySelector("button[onclick*=\"addToCart('nae'\"]").onclick = () => addToCart('nae', 'foto/Nae.jpg');
-    document.querySelector("button[onclick*=\"addToCart('yuna'\"]").onclick = () => addToCart('yuna', 'foto/Yuna.jpg');
-    document.querySelector("button[onclick*=\"addToCart('alice'\"]").onclick = () => addToCart('alice', 'foto/Alice.jpg');
-    document.querySelector("button[onclick*=\"addToCart('melody'\"]").onclick = () => addToCart('melody', 'foto/Melody.jpg');
-    document.querySelector("button[onclick*=\"addToCart('ella'\"]").onclick = () => addToCart('ella', 'foto/Ella.jpg');
-    document.querySelector("button[onclick*=\"addToCart('group'\"]").onclick = () => addToCart('group', 'foto/group2.jpg');
+    document.querySelector("button[onclick*=\"addToCart('nae'\"]").onclick = () => addToCart('nae', 'img/Nae.jpg');
+    document.querySelector("button[onclick*=\"addToCart('yuna'\"]").onclick = () => addToCart('yuna', 'img/Yuna.jpg');
+    document.querySelector("button[onclick*=\"addToCart('alice'\"]").onclick = () => addToCart('alice', 'img/Alice.jpg');
+    document.querySelector("button[onclick*=\"addToCart('melody'\"]").onclick = () => addToCart('melody', 'img/Melody.jpg');
+    document.querySelector("button[onclick*=\"addToCart('ella'\"]").onclick = () => addToCart('ella', 'img/Ella.jpg');
+    document.querySelector("button[onclick*=\"addToCart('group'\"]").onclick = () => addToCart('group', 'img/group2.jpg');
 
 
     // Merender komponen dinamis
