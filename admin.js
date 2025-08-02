@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.appendChild(script);
     }
 
-    // Fungsi untuk merender tabel pesanan (tanpa checklist)
+    // Fungsi untuk merender tabel pesanan
     function renderTable(data) {
         ordersTbody.innerHTML = '';
         if (data.length === 0) {
@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(row.Total)}</td>
                 <td><a href="${row['Link Bukti Bayar']}" target="_blank" class="text-purple-400 hover:underline">View Proof</a></td>
             `;
+
             ordersTbody.appendChild(tr);
         });
     }

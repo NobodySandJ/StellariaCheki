@@ -1,0 +1,164 @@
+{
+  "config": {
+    "hargaMemberCheki": 25000,
+    "hargaGroupCheki": 30000
+  },
+  "faqs": [
+    {
+      "question": "Apa itu Cheki?",
+      "answer": "Cheki adalah foto instan (seperti polaroid) yang diambil bersama member idol. Ini adalah cara populer bagi fans untuk mendapatkan kenang-kenangan pribadi dengan idola favorit mereka."
+    },
+    {
+      "question": "Bagaimana jika saya berhalangan hadir di event?",
+      "answer": "Tidak masalah. Jika Anda sudah membayar, Cheki Anda akan tetap diambil oleh tim kami. Kami bisa mengirimkannya ke alamat Anda (ongkos kirim ditanggung pemesan) atau bisa Anda ambil di event berikutnya. Silakan hubungi contact person kami."
+    },
+    {
+      "question": "Bolehkah saya meminta pose tertentu saat Cheki?",
+      "answer": "Tentu saja! Selama posenya sopan dan tidak melanggar aturan, Anda bebas berekspresi bersama member. Diskusikan pose yang Anda inginkan dengan member saat giliran Anda."
+    },
+    {
+      "question": "Apakah tiket Cheki bisa digunakan di event lain?",
+      "answer": "Tiket Cheki yang dibeli untuk satu event hanya berlaku untuk event tersebut, kecuali ada pengumuman khusus dari kami. Ini untuk memastikan semua fans mendapatkan kesempatan yang sama di setiap acara."
+    }
+  ],
+  "nextEventLineup": {
+    "eventTitle": "Malang Creative Center",
+    "lineup": {
+      "nae": true,
+      "yuna": true,
+      "alice": true,
+      "melody": true,
+      "ella": true
+    }
+  },
+  "events": [
+    {
+        "date":"28 Agustus 2025",
+        "title":"Malang Creative Center",
+        "time":"2:00 PM - 5:00 PM",
+        "status":"upcoming"
+    },
+    {
+      "date": "27 Juli 2025",
+      "title": "Ma chung university",
+      "time": "2:00 PM - 5:00 PM",
+      "status": "finished"
+    }
+  ],
+  "members": {
+    "nae": {
+      "name": "Nae",
+      "fullName": "🧡NAE🧡",
+      "color": "text-orange-400",
+      "jiko": "Ba~ kyun!! Cahaya cinta yang menembus hatimu! Nyahoo~ Aku Nae ^,^♪",
+      "ig": "evilnae_",
+      "tiktok": "evilnae",
+      "photos": [
+        "img/Nae.jpg",
+        "img/gallery/f-nae1.jpg",
+        "img/gallery/f-nae2.jpg"
+      ],
+      "tanggallahir": "19 February",
+      "zodiac": "Pisces",
+      "tinggibadan": "157cm",
+      "goldarah": "AB",
+      "mbti": "ENFJ",
+      "hobi": "Cosplay, Menyanyi",
+      "makananfavorit": "Bebek, Tiramisu Cake, Mango, Taro",
+      "warnafavorit": "Merah, Orange, purple"
+    },
+    "yuna": {
+      "name": "Yuna",
+      "fullName": "💛YUNA💛",
+      "color": "text-yellow-400",
+      "jiko": "Seperti madu yang ‘kan maniskan hari harimu, Halo, aku Yunaaa~! 🐝✨",
+      "ig": "hokaitto",
+      "tiktok": "hokaitto",
+      "photos": [
+        "img/Yuna.jpg",
+        "img/gallery/f-yuna1.jpg",
+        "img/gallery/f-yuna2.jpg"
+      ],
+      "tanggallahir": "27 Desember",
+      "zodiac": "Capricorn",
+      "tinggibadan": "157cm",
+      "goldarah": "B",
+      "mbti": "INTJ",
+      "hobi": "Makeup & Dress up, Cosplay, Tidur",
+      "makananfavorit": "Mie nyemek pake nugget, Apapun ga beracun (opsional)",
+      "warnafavorit": "Ungu, Hitam, Biru, Kuning"
+    },
+    "alice": {
+      "name": "Alice",
+      "fullName": "💜ALICE💜",
+      "color": "text-purple-400",
+      "jiko": "Si gadis ceria yang akan membawa kamu ke Wornderlad Panggil aku Alice~ 🐰✨",
+      "ig": "alicelyn__",
+      "tiktok": "arisurisuu_",
+      "photos": [
+        "img/Alice.jpg",
+        "img/gallery/f-alice1.jpg",
+        "img/gallery/f-alice2.jpg"
+      ],
+      "tanggallahir": "7 November",
+      "zodiac": "Scorpio",
+      "tinggibadan": "160cm",
+      "goldarah": "O",
+      "mbti": "ENFJ",
+      "hobi": "Wotagei, imggraphy, Gaming",
+      "makananfavorit": "Susu Stroberi, Roti, Sushi, Martabak",
+      "warnafavorit": "Putih, Ungu, Hitam"
+    },
+    "melody": {
+      "name": "Melody",
+      "fullName": "❤️MELODY❤️",
+      "color": "text-red-500",
+      "jiko": "Seperti lagu favoritmu, bolehkah aku selalu temani hari-harimu? Halo, aku Melody! 🎵🍒",
+      "ig": "lodehehe",
+      "tiktok": "mango.sodium",
+      "photos": [
+        "img/Melody.jpg",
+        "img/gallery/f-melody1.jpg",
+        "img/gallery/f-melody2.jpg"
+      ],
+      "tanggallahir": "13 November",
+      "zodiac": "Scorpio",
+      "tinggibadan": "155cm",
+      "goldarah": "O",
+      "mbti": "ENFP",
+      "hobi": "Membaca, Menulis, Baking, Nailart",
+      "makananfavorit": "Coklat, Mangga, Telor gulung",
+      "warnafavorit": "Biru, Putih, Merah"
+    },
+    "ella": {
+      "name": "Ella",
+      "fullName": "💚ELLA💚",
+      "color": "text-green-500",
+      "jiko": "Seniman introvert yang akan melukis senyuman di wajahmu! Halo, aku Ella~ 🎨✨",
+      "ig": "salmonelix",
+      "tiktok": "salmonelix",
+      "photos": [
+        "img/Ella.jpg",
+        "img/gallery/f-ella1.jpg",
+        "img/gallery/f-ella2.jpg"
+      ],
+      "tanggallahir": "26 januari",
+      "zodiac": "Aquarius",
+      "tinggibadan": "162cm",
+      "goldarah": "B",
+      "mbti": "INFP",
+      "hobi": "Menari, Cosplay, Menggambar",
+      "makananfavorit": "Salmon, Sushi, Lemper, Mie Ayam, Mangut iwak pe",
+      "warnafavorit": "Turqoise, Ungu"
+    },
+    "group": {
+      "name": "Group Cheki",
+      "fullName": "Group Cheki 🖤",
+      "color": "text-slate-300",
+      "photos": [
+        "img/group2.jpg"
+      ],
+      "deskripsi": "Stellaria adalah grup idola yang berasal dari Malang, Indonesia.."
+    }
+  }
+}

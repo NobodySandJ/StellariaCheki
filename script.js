@@ -1,5 +1,5 @@
 // ====================================================================================
-// || PENGATURAN UTAMA WEBSITE (EDIT DI SINI) ||
+// || PENGATURAN UTAMA WEBSITE                                                      ||
 // ====================================================================================
 
 // GANTI dengan URL Google Script Anda yang sudah di-deploy
@@ -8,185 +8,11 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbynNa_F0glZnNXio_PblB
 // GANTI dengan Kunci Rahasia Anda. HARUS SAMA PERSIS dengan yang Anda simpan di Google Script.
 const API_KEY = "WhenStellariaMjk";
 
-const CONFIG = {
-  hargaMemberCheki: 25000,
-  hargaGroupCheki: 30000,
-};
+// Variabel untuk menampung semua data dari data.json
+let websiteData = {};
 
 // ====================================================================================
-// || EDIT FAQ DI SINI ||
-// ====================================================================================
-const faqs = [
-  {
-    question: "Apa itu Cheki?",
-    answer:
-      "Cheki adalah foto instan (seperti polaroid) yang diambil bersama member idol. Ini adalah cara populer bagi fans untuk mendapatkan kenang-kenangan pribadi dengan idola favorit mereka.",
-  },
-  {
-    question: "Bagaimana jika saya berhalangan hadir di event?",
-    answer:
-      "Tidak masalah. Jika Anda sudah membayar, Cheki Anda akan tetap diambil oleh tim kami. Kami bisa mengirimkannya ke alamat Anda (ongkos kirim ditanggung pemesan) atau bisa Anda ambil di event berikutnya. Silakan hubungi contact person kami.",
-  },
-  {
-    question: "Bolehkah saya meminta pose tertentu saat Cheki?",
-    answer:
-      "Tentu saja! Selama posenya sopan dan tidak melanggar aturan, Anda bebas berekspresi bersama member. Diskusikan pose yang Anda inginkan dengan member saat giliran Anda.",
-  },
-  {
-    question: "Apakah tiket Cheki bisa digunakan di event lain?",
-    answer:
-      "Tiket Cheki yang dibeli untuk satu event hanya berlaku untuk event tersebut, kecuali ada pengumuman khusus dari kami. Ini untuk memastikan semua fans mendapatkan kesempatan yang sama di setiap acara.",
-  },
-];
-
-// ====================================================================================
-// || EDIT LINEUP UNTUK EVENT TERDEKAT DI SINI ||
-// ====================================================================================
-const NEXT_EVENT_LINEUP = {
-  eventTitle: "Ma chung university",
-  lineup: {
-    nae: true,
-    yuna: true,
-    alice: true,
-    melody: true,
-    ella: true,
-  },
-};
-
-// ====================================================================================
-// || EDIT JADWAL EVENT DI SINI ||
-// ====================================================================================
-const events = [
-  {
-    date: "27 Juli 2025",
-    title: "Ma chung university",
-    time: "2:00 PM - 5:00 PM",
-    status: "upcoming",
-  },
-];
-
-// ====================================================================================
-// || EDIT DATA MEMBER DI SINI ||
-// ====================================================================================
-const members = {
-  nae: {
-    name: "Nae",
-    fullName: "🧡NAE🧡",
-    color: "text-orange-400",
-    jiko: "Ba~ kyun!! Cahaya cinta yang menembus hatimu! Nyahoo~ Aku Nae ^,^♪",
-    ig: "evilnae_",
-    tiktok: "evilnae",
-    photos: [
-      "foto/Nae.jpg",
-      "foto/gallery/f-nae1.jpg",
-      "foto/gallery/f-nae2.jpg",
-    ],
-    tanggallahir: "19 February",
-    zodiac: "Pisces",
-    tinggibadan: "157cm",
-    goldarah: "AB",
-    mbti: "ENFJ",
-    hobi: "Cosplay, Menyanyi",
-    makananfavorit: "Bebek, Tiramisu Cake, Mango, Taro",
-    warnafavorit: "Merah, Orange, purple",
-  },
-  yuna: {
-    name: "Yuna",
-    fullName: "💛YUNA💛",
-    color: "text-yellow-400",
-    jiko: "Seperti madu yang ‘kan maniskan hari harimu, Halo, aku Yunaaa~! 🐝✨",
-    ig: "hokaitto",
-    tiktok: "hokaitto",
-    photos: [
-      "foto/Yuna.jpg",
-      "foto/gallery/f-yuna1.jpg",
-      "foto/gallery/f-yuna2.jpg",
-    ],
-    tanggallahir: "27 Desember",
-    zodiac: "Capricorn",
-    tinggibadan: "157cm",
-    goldarah: "B",
-    mbti: "INTJ",
-    hobi: "Makeup & Dress up, Cosplay, Tidur",
-    makananfavorit:
-      "Mie nyemek pake nugget, Apapun ga beracun (opsional)",
-    warnafavorit: "Ungu, Hitam, Biru, Kuning",
-  },
-  alice: {
-    name: "Alice",
-    fullName: "💜ALICE💜",
-    color: "text-purple-400",
-    jiko: "Si gadis ceria yang akan membawa kamu ke Wornderlad Panggil aku Alice~ 🐰✨",
-    ig: "alicelyn__",
-    tiktok: "arisurisuu_",
-    photos: [
-      "foto/Alice.jpg",
-      "foto/gallery/f-alice1.jpg",
-      "foto/gallery/f-alice2.jpg",
-    ],
-    tanggallahir: "7 November",
-    zodiac: "Scorpio",
-    tinggibadan: "160cm",
-    goldarah: "O",
-    mbti: "ENFJ",
-    hobi: "Wotagei, Fotography, Gaming",
-    makananfavorit: "Susu Stroberi, Roti, Sushi, Martabak",
-    warnafavorit: "Putih, Ungu, Hitam",
-  },
-  melody: {
-    name: "Melody",
-    fullName: "❤️MELODY❤️",
-    color: "text-red-500",
-    jiko: "Seperti lagu favoritmu, bolehkah aku selalu temani hari-harimu? Halo, aku Melody! 🎵🍒",
-    ig: "lodehehe",
-    tiktok: "mango.sodium",
-    photos: [
-      "foto/Melody.jpg",
-      "foto/gallery/f-melody1.jpg",
-      "foto/gallery/f-melody2.jpg",
-    ],
-    tanggallahir: "13 November",
-    zodiac: "Scorpio",
-    tinggibadan: "155cm",
-    goldarah: "O",
-    mbti: "ENFP",
-    hobi: "Membaca, Menulis, Baking, Nailart",
-    makananfavorit: "Coklat, Mangga, Telor gulung",
-    warnafavorit: "Biru, Putih, Merah",
-  },
-  ella: {
-    name: "Ella",
-    fullName: "💚ELLA💚",
-    color: "text-green-500",
-    jiko: "Seniman introvert yang akan melukis senyuman di wajahmu! Halo, aku Ella~ 🎨✨",
-    ig: "salmonelix",
-    tiktok: "salmonelix",
-    photos: [
-      "foto/Ella.jpg",
-      "foto/gallery/f-ella1.jpg",
-      "foto/gallery/f-ella2.jpg",
-    ],
-    tanggallahir: "26 januari",
-    zodiac: "Aquarius",
-    tinggibadan: "162cm",
-    goldarah: "B",
-    mbti: "INFP",
-    hobi: "Menari, Cosplay, Menggambar",
-    makananfavorit: "Salmon, Sushi, Lemper, Mie Ayam, Mangut iwak pe",
-    warnafavorit: "Turqoise, Ungu",
-  },
-  group: {
-    name: "Group Cheki",
-    fullName: "Group Cheki 🖤",
-    color: "text-slate-300",
-    photos: ["foto/group2.jpg"],
-    deskripsi:
-      "Stellaria adalah grup idola yang berasal dari Malang, Indonesia...",
-  },
-};
-
-// ====================================================================================
-// || KODE INTI WEBSITE (JANGAN DIUBAH) ||
+// || KODE INTI WEBSITE (JANGAN DIUBAH)                                             ||
 // ====================================================================================
 
 let cart = JSON.parse(localStorage.getItem("stellaria-cart")) || [];
@@ -223,8 +49,8 @@ function renderCartItems() {
   let total = 0;
   cart.forEach((item, index) => {
     const price = item.name.includes("Group")
-      ? CONFIG.hargaGroupCheki
-      : CONFIG.hargaMemberCheki;
+      ? websiteData.config.hargaGroupCheki
+      : websiteData.config.hargaMemberCheki;
     const itemTotal = price * item.quantity;
     total += itemTotal;
     html += `<div class="flex items-center py-4 gap-4">
@@ -268,15 +94,23 @@ function updateCartCount() {
   });
 }
 
-function addToCart(name, fullName, image) {
+function addToCart(memberId, image) {
+  const member = websiteData.members[memberId];
+  if (!member) return;
+
+  const fullName = member.fullName;
+  const name = member.name;
+
   const existingItemIndex = cart.findIndex(
     (item) => item.name === fullName
   );
+
   if (existingItemIndex > -1) {
     updateItemQuantity(existingItemIndex, 1);
   } else {
     cart.push({ name: fullName, image, quantity: 1 });
   }
+
   localStorage.setItem("stellaria-cart", JSON.stringify(cart));
   updateCartCount();
   renderCartItems();
@@ -293,6 +127,7 @@ function addToCart(name, fullName, image) {
     setTimeout(() => notification.remove(), 300);
   }, 2500);
 }
+
 
 function removeFromCart(index) {
   cart.splice(index, 1);
@@ -313,8 +148,8 @@ function getCartSummary() {
   let total = 0;
   cart.forEach((item) => {
     const price = item.name.includes("Group")
-      ? CONFIG.hargaGroupCheki
-      : CONFIG.hargaMemberCheki;
+      ? websiteData.config.hargaGroupCheki
+      : websiteData.config.hargaMemberCheki;
     const subtotal = price * item.quantity;
     total += subtotal;
     items += `${item.name} (${item.quantity}x @${formatter.format(price)}) = ${formatter.format(subtotal)}\n`;
@@ -324,7 +159,7 @@ function getCartSummary() {
 
 
 function openModal(memberId) {
-  const member = members[memberId];
+  const member = websiteData.members[memberId];
   if (!member) return;
   const modalTitleEl = document.getElementById("modal-title");
   const modalSocialsEl = document.getElementById("modal-socials");
@@ -520,7 +355,7 @@ function renderSchedule() {
   const container = document.getElementById("schedule-container");
   if (!container) return;
   container.innerHTML = "";
-  if (events.length === 0) {
+  if (websiteData.events.length === 0) {
     container.innerHTML =
       '<p class="text-center text-slate-400 col-span-full">Belum ada jadwal event.</p>';
     return;
@@ -528,22 +363,22 @@ function renderSchedule() {
 
   let firstUpcomingFound = false;
 
-  events.forEach((event) => {
+  websiteData.events.forEach((event) => {
     const isFinished = event.status === "finished";
     const cardClasses = isFinished
       ? "bg-slate-800/60 opacity-60"
       : "bg-slate-800 shadow-lg hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1 transition-all duration-300 border border-slate-700";
 
     let lineupDetailsHtml = "";
-    if (!isFinished && !firstUpcomingFound && event.title === NEXT_EVENT_LINEUP.eventTitle) {
+    if (!isFinished && !firstUpcomingFound && event.title === websiteData.nextEventLineup.eventTitle) {
       let presentMembers = [];
       let absentMembers = [];
 
-      for (const memberKey in NEXT_EVENT_LINEUP.lineup) {
-        if (NEXT_EVENT_LINEUP.lineup[memberKey]) {
-          presentMembers.push(members[memberKey].name);
+      for (const memberKey in websiteData.nextEventLineup.lineup) {
+        if (websiteData.nextEventLineup.lineup[memberKey]) {
+          presentMembers.push(websiteData.members[memberKey].name);
         } else {
-          absentMembers.push(members[memberKey].name);
+          absentMembers.push(websiteData.members[memberKey].name);
         }
       }
 
@@ -587,7 +422,7 @@ function renderFaq() {
   if (!container) return;
   container.innerHTML = "";
 
-  faqs.forEach((faq) => {
+  websiteData.faqs.forEach((faq) => {
     const faqItemHtml = `
       <div class="faq-item bg-slate-800 rounded-xl shadow-sm overflow-hidden border border-slate-700">
           <button class="faq-question w-full flex justify-between items-center text-left p-4 md:p-5">
@@ -604,7 +439,6 @@ function renderFaq() {
     container.innerHTML += faqItemHtml;
   });
 
-  // Tambahkan event listener untuk membuka/menutup FAQ setelah dirender
   document.querySelectorAll(".faq-question").forEach((button) => {
     button.addEventListener("click", () => {
       const faqItem = button.parentElement;
@@ -613,111 +447,141 @@ function renderFaq() {
   });
 }
 
+// Fungsi untuk menginisialisasi website setelah data dimuat
+function initializeApp() {
+    // Menampilkan harga dari konfigurasi
+    document.getElementById("price-member").textContent = formatter.format(
+        websiteData.config.hargaMemberCheki
+    );
+    document.getElementById("price-group").textContent = formatter.format(
+        websiteData.config.hargaGroupCheki
+    );
+    
+    // Tambahkan event listener ke tombol "Add to Cart"
+    // Ini perlu diatur ulang di sini karena tombol-tombolnya sekarang bergantung pada data
+    document.querySelector("button[onclick*=\"addToCart('nae'\"]").onclick = () => addToCart('nae', 'foto/Nae.jpg');
+    document.querySelector("button[onclick*=\"addToCart('yuna'\"]").onclick = () => addToCart('yuna', 'foto/Yuna.jpg');
+    document.querySelector("button[onclick*=\"addToCart('alice'\"]").onclick = () => addToCart('alice', 'foto/Alice.jpg');
+    document.querySelector("button[onclick*=\"addToCart('melody'\"]").onclick = () => addToCart('melody', 'foto/Melody.jpg');
+    document.querySelector("button[onclick*=\"addToCart('ella'\"]").onclick = () => addToCart('ella', 'foto/Ella.jpg');
+    document.querySelector("button[onclick*=\"addToCart('group'\"]").onclick = () => addToCart('group', 'foto/group2.jpg');
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Menampilkan harga dari konfigurasi
-  document.getElementById("price-member").textContent = formatter.format(
-    CONFIG.hargaMemberCheki
-  );
-  document.getElementById("price-group").textContent = formatter.format(
-    CONFIG.hargaGroupCheki
-  );
 
-  // Merender komponen dinamis
-  renderSchedule();
-  renderFaq();
+    // Merender komponen dinamis
+    renderSchedule();
+    renderFaq();
 
-  // Memperbarui tampilan keranjang belanja saat halaman dimuat
-  updateCartCount();
-  renderCartItems();
+    // Memperbarui tampilan keranjang belanja saat halaman dimuat
+    updateCartCount();
+    renderCartItems();
 
-  // Menambahkan event listener ke form checkout
-  const checkoutForm = document.getElementById("checkout-form");
-  if(checkoutForm) {
-    checkoutForm.addEventListener("submit", completeOrder);
-  }
-
-  // Fungsionalitas untuk menu mobile (hamburger menu)
-  const menuToggle = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-  if (menuToggle && mobileMenu) {
-    const mobileNavLinks = mobileMenu.querySelectorAll("a.nav-link");
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-    // Sembunyikan menu setelah link di-klik
-    mobileNavLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
-      });
-    });
-  }
-
-  // Mengatur link navigasi aktif berdasarkan posisi scroll
-  const sections = document.querySelectorAll("main section");
-  const navLinks = document.querySelectorAll(
-    "#desktop-menu a.nav-link, #mobile-menu a.nav-link"
-  );
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            link.classList.remove("active");
-            if (
-              link.getAttribute("href").substring(1) === entry.target.id
-            ) {
-              link.classList.add("active");
-            }
-          });
-        }
-      });
-    },
-    { rootMargin: "-40% 0px -60% 0px" }
-  );
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Fungsionalitas untuk menutup modal
-  document.querySelectorAll(".modal").forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-      }
-    });
-  });
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document
-        .querySelectorAll(".modal.active")
-        .forEach((modal) => modal.classList.remove("active"));
+    // Menambahkan event listener ke form checkout
+    const checkoutForm = document.getElementById("checkout-form");
+    if(checkoutForm) {
+        checkoutForm.addEventListener("submit", completeOrder);
     }
-  });
 
-  // =======================================================
-  // || KODE BARU: Pemicu untuk Login Admin               ||
-  // =======================================================
-  const copyrightFooter = document.getElementById("copyright-footer");
-  let clickCount = 0;
-  let clickTimer = null;
+    // Fungsionalitas untuk menu mobile (hamburger menu)
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (menuToggle && mobileMenu) {
+        const mobileNavLinks = mobileMenu.querySelectorAll("a.nav-link");
+        menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        });
+        mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            mobileMenu.classList.add("hidden");
+        });
+        });
+    }
 
-  if (copyrightFooter) {
-    copyrightFooter.addEventListener('click', () => {
-      clickCount++;
-
-      if (clickTimer) {
-        clearTimeout(clickTimer);
-      }
-      
-      if (clickCount >= 5) {
-        window.open('admin.html', '_blank');
-        clickCount = 0; 
-      }
-      
-      clickTimer = setTimeout(() => {
-        clickCount = 0;
-      }, 1000); 
+    // Mengatur link navigasi aktif berdasarkan posisi scroll
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(
+        "#desktop-menu a.nav-link, #mobile-menu a.nav-link"
+    );
+    const observer = new IntersectionObserver(
+        (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (
+                link.getAttribute("href").substring(1) === entry.target.id
+                ) {
+                link.classList.add("active");
+                }
+            });
+            }
+        });
+        },
+        { rootMargin: "-40% 0px -60% 0px" }
+    );
+    sections.forEach((section) => {
+        observer.observe(section);
     });
-  }
+
+    // Fungsionalitas untuk menutup modal
+    document.querySelectorAll(".modal").forEach((modal) => {
+        modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("active");
+        }
+        });
+    });
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+        document
+            .querySelectorAll(".modal.active")
+            .forEach((modal) => modal.classList.remove("active"));
+        }
+    });
+
+    // Pemicu untuk Login Admin
+    const copyrightFooter = document.getElementById("copyright-footer");
+    let clickCount = 0;
+    let clickTimer = null;
+
+    if (copyrightFooter) {
+        copyrightFooter.addEventListener('click', () => {
+        clickCount++;
+
+        if (clickTimer) {
+            clearTimeout(clickTimer);
+        }
+        
+        if (clickCount >= 5) {
+            window.open('admin.html', '_blank');
+            clickCount = 0; 
+        }
+        
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 1000); 
+        });
+    }
+}
+
+// Event listener utama yang akan memuat data dan memulai aplikasi
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('data.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      websiteData = data; // Simpan data ke variabel global
+      initializeApp(); // Jalankan sisa aplikasi
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+      // Anda bisa menampilkan pesan error di halaman web jika data gagal dimuat
+      document.body.innerHTML = `<div style="color: white; text-align: center; padding-top: 50px;">
+                                    <h1>Error</h1>
+                                    <p>Gagal memuat data website. Silakan coba lagi nanti.</p>
+                                 </div>`;
+    });
 });
