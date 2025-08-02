@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // =================================================================
     // || KONFIGURasi ADMIN                                           ||
     // =================================================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynNa_F0glZnNXio_PblBdk9vpc_rFIuG9Z5eSBXyyiADKaKTCXAsX_rwyyyNg0pA3u/exec"; // <-- GANTI DENGAN URL BARU SETELAH DEPLOY
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi31uqPm2Mj3KxhL1zsm6Wlhd_tIoFEW15DLJUVor6zK9TcyDVTjaW7gOvvqNKAkLI/exec"; // <-- GANTI DENGAN URL BARU SETELAH DEPLOY
     const ADMIN_USER = "SkpnMjk";
     const ADMIN_PASS = "whenSmjk";
     const API_KEY = "WhenStellariaMjk";
