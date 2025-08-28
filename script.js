@@ -1,11 +1,3 @@
-// ====================================================================================
-// || PENGATURAN UTAMA WEBSITE                                                      ||
-// ====================================================================================
-
-// GANTI dengan URL Google Script Anda yang sudah di-deploy
-const scriptURL = "https://script.google.com/macros/s/AKfycbyi31uqPm2Mj3KxhL1zsm6Wlhd_tIoFEW15DLJUVor6zK9TcyDVTjaW7gOvvqNKAkLI/exec";
-// GANTI dengan Kunci Rahasia Anda. HARUS SAMA PERSIS dengan yang Anda simpan di Google Script.
-const API_KEY = "WhenStellariaMjk";
 
 // Variabel untuk menampung semua data dari data.json
 let websiteData = {};
@@ -289,6 +281,10 @@ function validateForm() {
   return isValid;
 }
 
+// ====================================================================================
+// || FUNGSI YANG DIUBAH UNTUK VERCEL                                                ||
+// ====================================================================================
+
 async function completeOrder(event) {
   event.preventDefault();
   if (!validateForm()) return;
@@ -307,8 +303,8 @@ async function completeOrder(event) {
     const cartData = getCartSummary();
     const file = fileInput.files[0];
 
+    // Payload sekarang TIDAK LAGI berisi apiKey
     const payload = {
-      apiKey: API_KEY,
       nama: document.getElementById("fullname").value,
       email: document.getElementById("email").value,
       no_wa: document.getElementById("phone").value,
@@ -322,8 +318,12 @@ async function completeOrder(event) {
     };
 
     try {
-      const response = await fetch(scriptURL, {
+      // Ubah URL fetch ke endpoint API yang baru kita buat
+      const response = await fetch('/api/submit-order', {
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
       const result = await response.json();
@@ -349,6 +349,10 @@ async function completeOrder(event) {
     submitButton.textContent = "Complete Order";
   };
 }
+
+// ====================================================================================
+// || KODE LANJUTAN (TIDAK BERUBAH)                                                  ||
+// ====================================================================================
 
 function renderSchedule() {
   const container = document.getElementById("schedule-container");

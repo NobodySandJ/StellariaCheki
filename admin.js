@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // =================================================================
-    // || KONFIGURasi ADMIN                                           ||
-    // =================================================================
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi31uqPm2Mj3KxhL1zsm6Wlhd_tIoFEW15DLJUVor6zK9TcyDVTjaW7gOvvqNKAkLI/exec"; // <-- GANTI DENGAN URL BARU SETELAH DEPLOY
-    const ADMIN_USER = "SkpnMjk";
-    const ADMIN_PASS = "whenSmjk";
-    const API_KEY = "WhenStellariaMjk";
+
+
 
     // =================================================================
     // || Elemen DOM                                                  ||
@@ -50,20 +45,69 @@ document.addEventListener('DOMContentLoaded', function () {
         showDashboard();
     }
 
+    // =================================================================
+    // || FUNGSI YANG DIUBAH UNTUK VERCEL                               ||
+    // =================================================================
+
     // Handler untuk form login
-    loginForm.addEventListener('submit', function (e) {
+    loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        if (username === ADMIN_USER && password === ADMIN_PASS) {
-            sessionStorage.setItem('isAdminAuthenticated', 'true');
-            showDashboard();
-        } else {
-            loginError.textContent = 'Invalid username or password.';
-            setTimeout(() => { loginError.textContent = ''; }, 3000);
+        try {
+            const response = await fetch('/api/admin-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                sessionStorage.setItem('isAdminAuthenticated', 'true');
+                showDashboard();
+            } else {
+                loginError.textContent = 'Invalid username or password.';
+                setTimeout(() => { loginError.textContent = ''; }, 3000);
+            }
+        } catch (error) {
+            loginError.textContent = 'An error occurred during login.';
         }
     });
+
+    // Fungsi untuk mengambil data dari serverless function
+    async function fetchData() {
+        loader.style.display = 'block';
+        ordersTable.classList.add('hidden');
+        loader.innerHTML = '<p class="text-lg">Loading data, please wait...</p>';
+
+        try {
+            // Panggil endpoint API kita, bukan Google Script langsung
+            const response = await fetch('/api/get-orders');
+            const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            loader.style.display = 'none';
+            ordersTable.classList.remove('hidden');
+
+            renderTable(data);
+            calculateSummary(data);
+
+        } catch (error) {
+            loader.innerHTML = `<p class="text-red-500">Failed to load data: ${error.message}</p>`;
+            ordersTable.classList.add('hidden');
+        }
+    }
+    
+    // =================================================================
+    // || KODE LANJUTAN (TIDAK BERUBAH)                                 ||
+    // =================================================================
 
     // Handler untuk logout
     logoutButton.addEventListener('click', () => {
@@ -83,42 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showLogin() {
         loginSection.classList.remove('hidden');
         adminDashboard.classList.add('hidden');
-    }
-
-    // Fungsi untuk mengambil data dari Google Sheet menggunakan metode JSONP
-    function fetchData() {
-        loader.style.display = 'block';
-        ordersTable.classList.add('hidden');
-        loader.innerHTML = '<p class="text-lg">Loading data, please wait...</p>';
-
-        const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-
-        window[callbackName] = function(data) {
-            loader.style.display = 'none';
-            ordersTable.classList.remove('hidden');
-
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            
-            renderTable(data);
-            calculateSummary(data);
-
-            document.body.removeChild(script);
-            delete window[callbackName];
-        };
-
-        const script = document.createElement('script');
-        script.src = `${SCRIPT_URL}?action=getOrders&apiKey=${API_KEY}&callback=${callbackName}`;
-
-        script.onerror = function() {
-            loader.innerHTML = `<p class="text-red-500">Failed to load data. Please check the script URL and your connection.</p>`;
-            ordersTable.classList.add('hidden');
-            document.body.removeChild(script);
-            delete window[callbackName];
-        };
-
-        document.body.appendChild(script);
     }
 
     // Fungsi untuk merender tabel pesanan
