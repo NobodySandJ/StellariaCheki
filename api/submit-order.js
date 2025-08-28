@@ -17,6 +17,11 @@ export default async function handler(req, res) {
     // Teruskan data ke Google Script
     const response = await fetch(scriptURL, {
       method: 'POST',
+      // ================== TAMBAHKAN BARIS INI ==================
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // =========================================================
       body: JSON.stringify(payload),
     });
 
