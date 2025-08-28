@@ -282,7 +282,7 @@ function validateForm() {
 }
 
 // ====================================================================================
-// || FUNGSI YANG DIUBAH UNTUK VERCEL                                                ||
+// || FUNGSI YANG DIUBAH UNTUK VERCEL (DENGAN KOMPRESI GAMBAR)                        ||
 // ====================================================================================
 
 async function completeOrder(event) {
@@ -295,61 +295,81 @@ async function completeOrder(event) {
   submitButton.textContent = "Processing...";
 
   const fileInput = document.getElementById("payment-proof");
-  const reader = new FileReader();
-  reader.readAsDataURL(fileInput.files[0]);
+  const originalFile = fileInput.files[0];
 
-  reader.onload = async () => {
-    const base64Data = reader.result.split(",")[1];
-    const cartData = getCartSummary();
-    const file = fileInput.files[0];
+  // Opsi untuk kompresi gambar
+  const options = {
+    maxSizeMB: 1, // Ukuran maksimum file setelah kompresi (dalam MB)
+    maxWidthOrHeight: 1024, // Resolusi maksimum
+    useWebWorker: true, // Gunakan web worker untuk performa lebih baik
+    fileType: 'image/jpeg', // Paksa output ke format JPEG untuk kompresi lebih baik
+  };
 
-    // Payload sekarang TIDAK LAGI berisi apiKey
-    const payload = {
-      nama: document.getElementById("fullname").value,
-      email: document.getElementById("email").value,
-      no_wa: document.getElementById("phone").value,
-      ig: document.getElementById("instagram").value,
-      pesanan: cartData.items,
-      total: cartData.total,
-      totalFormatted: cartData.totalFormatted,
-      fileData: base64Data,
-      fileName: file.name,
-      mimeType: file.type
-    };
+  try {
+    console.log(`Ukuran file asli: ${(originalFile.size / 1024 / 1024).toFixed(2)} MB`);
+    
+    // Kompres gambar menggunakan library
+    const compressedFile = await imageCompression(originalFile, options);
+    
+    console.log(`Ukuran file setelah kompresi: ${(compressedFile.size / 1024 / 1024).toFixed(2)} MB`);
 
-    try {
-      // Ubah URL fetch ke endpoint API yang baru kita buat
-      const response = await fetch('/api/submit-order', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const result = await response.json();
+    const reader = new FileReader();
+    reader.readAsDataURL(compressedFile);
 
-      if (result.result === "success") {
-        clearCart();
-        closeCheckoutModal();
-        document.getElementById("thankyou-modal").classList.add("active");
-        form.reset();
-      } else {
-        alert("Gagal mengirim pesanan. Error: " + (result.message || "Unknown error"));
+    reader.onload = async () => {
+      const base64Data = reader.result.split(",")[1];
+      const cartData = getCartSummary();
+      
+      const payload = {
+        nama: document.getElementById("fullname").value,
+        email: document.getElementById("email").value,
+        no_wa: document.getElementById("phone").value,
+        ig: document.getElementById("instagram").value,
+        pesanan: cartData.items,
+        total: cartData.total,
+        totalFormatted: cartData.totalFormatted,
+        fileData: base64Data,
+        fileName: compressedFile.name, // Gunakan nama dari file yang sudah dikompres
+        mimeType: compressedFile.type, // Gunakan tipe dari file yang sudah dikompres
+      };
+
+      try {
+        const response = await fetch('/api/submit-order', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+
+        if (result.result === "success") {
+          clearCart();
+          closeCheckoutModal();
+          document.getElementById("thankyou-modal").classList.add("active");
+          form.reset();
+        } else {
+          alert("Gagal mengirim pesanan. Error: " + (result.message || "Unknown error"));
+        }
+      } catch (error) {
+        alert("Gagal mengirim pesanan. Terjadi kesalahan: " + error.message);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Complete Order";
       }
-    } catch (error) {
-      alert("Gagal mengirim pesanan. Terjadi kesalahan: " + error.message);
-    } finally {
+    };
+    reader.onerror = () => {
+      alert("Gagal membaca file bukti pembayaran setelah kompresi.");
       submitButton.disabled = false;
       submitButton.textContent = "Complete Order";
-    }
-  };
-  reader.onerror = () => {
-    alert("Gagal membaca file bukti pembayaran.");
+    };
+
+  } catch (error) {
+    alert("Gagal mengkompres gambar. Pastikan file yang diupload adalah gambar. Error: " + error.message);
     submitButton.disabled = false;
     submitButton.textContent = "Complete Order";
-  };
+  }
 }
-
 // ====================================================================================
 // || KODE LANJUTAN (TIDAK BERUBAH)                                                  ||
 // ====================================================================================
